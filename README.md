@@ -1,2 +1,2 @@
-# juego-verbos-backend
+# juego-verbos
 Backend for Juego Verbos
