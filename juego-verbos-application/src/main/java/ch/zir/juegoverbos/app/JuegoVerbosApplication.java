@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import ch.zir.juegoverbos.app.resources.VerbsResource;
+import ch.zir.juegoverbos.app.store.VerbStore;
 
 public class JuegoVerbosApplication extends Application<JuegoVerbosConfiguration> {
 

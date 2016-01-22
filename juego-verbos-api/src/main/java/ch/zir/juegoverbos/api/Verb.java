@@ -1,53 +1,58 @@
 package ch.zir.juegoverbos.api;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Verb {
 
 	private String infinitive;
-	private Map<Language, String> translations;
-
-	private List<GrammaticalConjugation> conjugations;
+	private final Map<Language, String> translations;
+	private final Set<GrammaticalConjugation> conjugations;
 
 	public Verb() {
-		// JSON deserialize
+		translations = new HashMap<>();
+		conjugations = new HashSet<>();
 	}
 
-	public Verb(final String infinitive, final Map<Language, String> translations, final List<GrammaticalConjugation> conjugations) {
-		super();
-		this.infinitive = infinitive;
-		this.translations = translations;
-		this.conjugations = conjugations;
-	}
-
+	@JsonProperty
 	public String getInfinitive() {
 		return infinitive;
 	}
 
-	// public String getTranslationDefault() {
-	// return getTranslation(Language.EN);
-	// }
-	//
-	// public String getTranslation(final Language lang) {
-	// String result = translations.get(Language.EN);
-	//
-	// if (lang != null || lang != Language.EN) {
-	// result = translations.get(lang);
-	// }
-	// return result;
-	// }
+	public void setInfinitive(final String infinitive) {
+		this.infinitive = infinitive;
+	}
 
 	@JsonProperty
 	public Map<Language, String> getTranslations() {
 		return translations;
 	}
 
+	public void addTranslation(final Language lang, final String translation) {
+		translations.putIfAbsent(lang, translation);
+	}
+
 	@JsonProperty
-	public List<GrammaticalConjugation> getConjugations() {
+	public Set<GrammaticalConjugation> getConjugations() {
 		return conjugations;
 	}
 
+	public void addConjugation(final GrammaticalConjugation conjugation) {
+		conjugations.add(conjugation);
+	}
+
+	@Override
+	public String toString() {
+		try {
+			return new ObjectMapper().writeValueAsString(this);
+		} catch (final JsonProcessingException e) {
+			return super.toString();
+		}
+	}
 }

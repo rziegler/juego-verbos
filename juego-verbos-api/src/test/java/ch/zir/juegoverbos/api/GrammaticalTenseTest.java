@@ -19,4 +19,10 @@ public class GrammaticalTenseTest {
 		// equalTo("{\"es\":\"Futuro\",\"en\":\"Future\",\"de\":\"\"}"));
 		assertThat(actual, equalTo("\"FUTURE\""));
 	}
+
+	@Test
+	public void from() {
+		final GrammaticalTense actual = GrammaticalTense.from("Presente");
+		assertThat(actual, equalTo(GrammaticalTense.PRESENT));
+	}
 }

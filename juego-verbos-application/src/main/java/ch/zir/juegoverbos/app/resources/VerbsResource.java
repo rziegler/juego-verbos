@@ -10,7 +10,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import ch.zir.juegoverbos.api.Verb;
-import ch.zir.juegoverbos.app.VerbStore;
+import ch.zir.juegoverbos.app.store.VerbStore;
 
 import com.google.common.base.Optional;
 

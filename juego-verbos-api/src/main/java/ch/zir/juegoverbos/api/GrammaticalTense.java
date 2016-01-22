@@ -1,5 +1,8 @@
 package ch.zir.juegoverbos.api;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
@@ -51,5 +54,13 @@ public enum GrammaticalTense {
 		default:
 			throw new IllegalArgumentException("Illegal argument: " + lang);
 		}
+	}
+
+	public static GrammaticalTense from(final String enString) {
+		final Optional<GrammaticalTense> tense = Stream.of(GrammaticalTense.values())//
+				.filter(v -> {
+					return v.getEn().equals(enString);
+				}).findFirst();
+		return tense.get();
 	}
 }
