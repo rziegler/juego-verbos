@@ -58,9 +58,7 @@ public enum GrammaticalTense {
 
 	public static GrammaticalTense from(final String enString) {
 		final Optional<GrammaticalTense> tense = Stream.of(GrammaticalTense.values())//
-				.filter(v -> {
-					return v.getEn().equals(enString);
-				}).findFirst();
+				.filter(v -> v.getEn().equals(enString)).findFirst();
 		return tense.get();
 	}
 }

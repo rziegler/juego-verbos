@@ -2,12 +2,21 @@ package ch.zir.juegoverbos.app.store;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.zir.juegoverbos.api.GrammaticalConjugation;
 import ch.zir.juegoverbos.api.Verb;
 import ch.zir.juegoverbos.app.store.csv.CsvLoader;
 
 public class VerbStore {
 
+	Logger log = LoggerFactory.getLogger(VerbStore.class);
 	List<Verb> verbs;
 
 	public VerbStore() {
@@ -15,31 +24,36 @@ public class VerbStore {
 	}
 
 	public void load() {
-		// final Map<Language, String> translations = new HashMap<>();
-		// translations.put(Language.EN, "go");
-		// translations.put(Language.DE, "gehen");
-		//
-		// final List<GrammaticalConjugation> conjugations = new ArrayList<>();
-		// conjugations.add(new GrammaticalConjugation(PRESENT, FIRST_SINGULAR,
-		// "voy"));
-		// conjugations.add(new GrammaticalConjugation(PRESENT, SECOND_SINGULAR,
-		// "vas"));
-		// conjugations.add(new GrammaticalConjugation(PRESENT, THIRD_SINGULAR,
-		// "va"));
-		// conjugations.add(new GrammaticalConjugation(PRESENT, FIRST_PLURAL,
-		// "vamos"));
-		// conjugations.add(new GrammaticalConjugation(PRESENT, SECOND_PLURAL,
-		// "vais"));
-		// conjugations.add(new GrammaticalConjugation(PRESENT, THIRD_PLURAL,
-		// "van"));
-		//
-		// verbs.add(new Verb("ir", translations, conjugations));
-
 		verbs.addAll(new CsvLoader().load());
 	}
 
 	public List<Verb> getVerbs() {
 		return verbs;
+	}
+
+	public Verb getVerb(final String infinitive) {
+		Verb result;
+		if ("random".equals(infinitive)) {
+			final int randomIndex = new Random().nextInt(verbs.size());
+			result = verbs.get(randomIndex);
+		} else {
+			final Optional<Verb> verb = verbs.stream().filter(v -> v.getInfinitive().equals(infinitive)).findFirst();
+			result = verb.get();
+		}
+		return result;
+	}
+
+	public Verb getVerb(final String infinitive, final String tense) {
+		final Verb verb = getVerb(infinitive);
+		final Set<GrammaticalConjugation> conjugations = verb.getConjugations().stream().filter(c -> c.getTense().name().equalsIgnoreCase(tense))
+				.collect(Collectors.toSet());
+
+		final Verb result = new Verb();
+		result.setInfinitive(verb.getInfinitive());
+		result.setTranslations(verb.getTranslations());
+		result.setConjugations(conjugations);
+		log.debug(result.toString());
+		return result;
 	}
 
 }

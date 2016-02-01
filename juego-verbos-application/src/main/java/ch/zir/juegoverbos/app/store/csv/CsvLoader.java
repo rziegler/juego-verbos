@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Stream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ch.zir.juegoverbos.api.GrammaticalConjugation;
 import ch.zir.juegoverbos.api.GrammaticalPerson;
@@ -21,6 +23,8 @@ import ch.zir.juegoverbos.api.Verb;
 
 public class CsvLoader {
 
+	Logger log = LoggerFactory.getLogger(CsvLoader.class);
+
 	public List<Verb> load() {
 		final List<Verb> result = new ArrayList<>();
 
@@ -28,22 +32,20 @@ public class CsvLoader {
 			final URL resource = getClass().getClassLoader().getResource("jehle_verb_database.csv");
 			final List<String> lines = Files.readAllLines(Paths.get(resource.toURI()));
 
-			final Stream<CsvLine> csvLines = lines.stream().skip(1).map(new Function<String, CsvLine>() {
-
+			final Map<String, List<CsvLine>> groupedCsvLines = lines.stream().skip(1).map(new Function<String, CsvLine>() {
 				@Override
 				public CsvLine apply(final String element) {
 					return parse(element);
 				}
-			});
+			}).filter(csvline -> csvline.getMood().equals("Indicative")).collect(groupingBy(CsvLine::getInfinitive));
 
-			final Map<String, List<CsvLine>> groupedLines = csvLines.collect(groupingBy(CsvLine::getInfinitive));
+			groupedCsvLines.values().stream().forEach(i -> {
 
-			groupedLines.values().stream().forEach(i -> {
 				final Verb resultVerb = i.stream().reduce(new Verb(), (verb, line) -> {
 					verb.setInfinitive(line.getInfinitive());
 					verb.addTranslation(Language.EN, line.getInfinitiveEnglish());
-					final GrammaticalTense tense = GrammaticalTense.from(line.getTense());
 
+					final GrammaticalTense tense = GrammaticalTense.from(line.getTense());
 					verb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.FIRST_SINGULAR, line.getForm1s()));
 					verb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.SECOND_SINGULAR, line.getForm2s()));
 					verb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.THIRD_SINGULAR, line.getForm3s()));
@@ -62,17 +64,16 @@ public class CsvLoader {
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
-		System.out.println(String.format("Loaded %d verbs.", result.size()));
+		log.info(String.format("Loaded %d verbs.", result.size()));
 		return result;
 	}
 
 	private CsvLine parse(final String element) {
-
 		final String[] parts = element.split("\"{1}(,\")?");
-		// System.out.println(Joiner.on("::").join(parts));
 		final CsvLine result = new CsvLine();
 		result.setInfinitive(parts[1]);
 		result.setInfinitiveEnglish(parts[2]);
+		result.setMood(parts[4]);
 		result.setTense(parts[6]);
 		result.setForm1s(parts[8]);
 		result.setForm2s(parts[9]);

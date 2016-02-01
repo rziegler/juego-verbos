@@ -38,6 +38,10 @@ public class Verb {
 		translations.putIfAbsent(lang, translation);
 	}
 
+	public void setTranslations(final Map<Language, String> translations) {
+		this.translations.putAll(translations);
+	}
+
 	@JsonProperty
 	public Set<GrammaticalConjugation> getConjugations() {
 		return conjugations;
@@ -45,6 +49,10 @@ public class Verb {
 
 	public void addConjugation(final GrammaticalConjugation conjugation) {
 		conjugations.add(conjugation);
+	}
+
+	public void setConjugations(final Set<GrammaticalConjugation> conjugations) {
+		this.conjugations.addAll(conjugations);
 	}
 
 	@Override

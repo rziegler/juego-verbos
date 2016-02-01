@@ -13,6 +13,7 @@ public class CsvLine {
 	private String form3p;
 	private String gerund;
 	private String pastparticiple;
+	private String mood;
 
 	public String getInfinitive() {
 		return infinitive;
@@ -100,6 +101,14 @@ public class CsvLine {
 
 	public void setPastparticiple(final String pastparticiple) {
 		this.pastparticiple = pastparticiple;
+	}
+
+	public String getMood() {
+		return mood;
+	}
+
+	public void setMood(final String mood) {
+		this.mood = mood;
 	}
 
 }
