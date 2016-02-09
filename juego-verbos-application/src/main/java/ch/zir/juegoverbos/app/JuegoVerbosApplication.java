@@ -6,7 +6,7 @@ import io.dropwizard.setup.Environment;
 import ch.zir.juegoverbos.app.resources.VerbsResource;
 import ch.zir.juegoverbos.app.store.VerbStore;
 
-import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
+import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
 
 public class JuegoVerbosApplication extends Application<JuegoVerbosConfiguration> {
 
@@ -21,7 +21,8 @@ public class JuegoVerbosApplication extends Application<JuegoVerbosConfiguration
 	public void initialize(final Bootstrap<JuegoVerbosConfiguration> bootstrap) {
 		super.initialize(bootstrap);
 
-		bootstrap.addBundle(new FileAssetsBundle("../../../../Work/Projects/juego-verbos-ui/app/", "/ui", "index.html"));
+		// bootstrap.addBundle(new FileAssetsBundle("../../../../Work/Projects/juego-verbos-ui/app/", "/ui", "index.html"));
+		bootstrap.addBundle(new ConfiguredAssetsBundle("/assets/", "/ui/"));
 
 		store = new VerbStore();
 		store.load();

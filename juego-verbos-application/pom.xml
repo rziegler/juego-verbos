@@ -15,8 +15,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.dirkraft.dropwizard</groupId>
-			<artifactId>dropwizard-file-assets</artifactId>
+			<groupId>com.bazaarvoice.dropwizard</groupId>
+			<artifactId>dropwizard-configurable-assets-bundle</artifactId>
 		</dependency>
 
 		<dependency>

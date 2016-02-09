@@ -1,3 +1,8 @@
+# Assets settings.
+assets:
+  overrides:
+    /ui: ../../../../Work/Projects/juego-verbos-ui/app/
+
 # Logging settings.
 logging:
 

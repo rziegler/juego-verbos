@@ -22,7 +22,7 @@ public class GrammaticalTenseTest {
 
 	@Test
 	public void from() {
-		final GrammaticalTense actual = GrammaticalTense.from("Presente");
+		final GrammaticalTense actual = GrammaticalTense.from("Present");
 		assertThat(actual, equalTo(GrammaticalTense.PRESENT));
 	}
 }
