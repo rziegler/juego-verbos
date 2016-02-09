@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,9 @@ public class CsvLoader {
 
 		try {
 			final URL resource = getClass().getClassLoader().getResource("jehle_verb_database.csv");
-			final List<String> lines = Files.readAllLines(Paths.get(resource.toURI()));
+			log.info("Loading resource " + resource.toString());
+			final Path path = Paths.get(resource.toURI());
+			final List<String> lines = Files.readAllLines(path);
 
 			final Map<String, List<CsvLine>> groupedCsvLines = lines.stream().skip(1).map(new Function<String, CsvLine>() {
 				@Override
