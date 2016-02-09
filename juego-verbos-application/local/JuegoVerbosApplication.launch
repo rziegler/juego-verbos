@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<stringAttribute key="bad_container_name" value="/juego-verbos-application/l"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/juego-verbos-application/src/main/java/ch/zir/juegoverbos/app/JuegoVerbosApplication.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ch.zir.juegoverbos.app.JuegoVerbosApplication"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="server juego-verbos-dev.yml"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="juego-verbos-application"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
+</launchConfiguration>

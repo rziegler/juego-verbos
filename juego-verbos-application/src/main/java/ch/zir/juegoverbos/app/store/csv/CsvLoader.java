@@ -2,12 +2,10 @@ package ch.zir.juegoverbos.app.store.csv;
 
 import static java.util.stream.Collectors.groupingBy;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +28,20 @@ public class CsvLoader {
 		final List<Verb> result = new ArrayList<>();
 
 		try {
-			final URL resource = getClass().getClassLoader().getResource("jehle_verb_database.csv");
-			log.info("Loading resource " + resource.toString());
-			final Path path = Paths.get(resource.toURI());
-			final List<String> lines = Files.readAllLines(path);
+			// final URL resource = getClass().getClassLoader().getResource("jehle_verb_database.csv");
+			final InputStream inputStream = getClass().getClassLoader().getResourceAsStream("jehle_verb_database.csv");
+
+			final BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+			String tmp = null;
+
+			final List<String> lines = new ArrayList<>();
+			while ((tmp = in.readLine()) != null) {
+				lines.add(tmp);
+			}
+
+			// log.info("Loading resource " + resource.toString());
+			// final Path path = Paths.get(resource.toURI());
+			// final List<String> lines = Files.readAllLines(path);
 
 			final Map<String, List<CsvLine>> groupedCsvLines = lines.stream().skip(1).map(new Function<String, CsvLine>() {
 				@Override
@@ -64,7 +72,7 @@ public class CsvLoader {
 				result.add(resultVerb);
 			});
 
-		} catch (IOException | URISyntaxException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 		log.info(String.format("Loaded %d verbs.", result.size()));
