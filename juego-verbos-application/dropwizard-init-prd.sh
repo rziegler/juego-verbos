@@ -33,8 +33,14 @@ start() {
         echo "${APPLICATION_NAME} is already running (pid: $pid)"
     else
         # Start dropwizard
-        echo "Starting ${APPLICATION_NAME}"
-        runuser ${APPLICATION_USER} -c "cd ${APPLICATION_HOME}; ${APPLICATION_CMD} > /dev/null &"
+        currentUser=$(whoami)
+        echo "Starting ${APPLICATION_NAME} for user '${currentUser}'"
+        if [ $currentUser  == ${APPLICATION_USER} ]
+        then
+                cd ${APPLICATION_HOME}; ${APPLICATION_CMD} > /dev/null &
+        else
+                runuser ${APPLICATION_USER} -c "cd ${APPLICATION_HOME}; ${APPLICATION_CMD} > /dev/null &"
+        fi
     fi
     return 0
 }
