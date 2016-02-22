@@ -1,7 +1,7 @@
 # Assets settings.
 assets:
   overrides:
-    /ui: /ui/app
+    /ui: ui/app
 
 # Logging settings.
 logging:
