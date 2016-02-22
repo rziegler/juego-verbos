@@ -1,6 +1,7 @@
 package ch.zir.juegoverbos.app;
 
 import io.dropwizard.Application;
+import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import ch.zir.juegoverbos.app.resources.VerbsResource;
@@ -20,9 +21,7 @@ public class JuegoVerbosApplication extends Application<JuegoVerbosConfiguration
 	@Override
 	public void initialize(final Bootstrap<JuegoVerbosConfiguration> bootstrap) {
 		super.initialize(bootstrap);
-
-		// bootstrap.addBundle(new FileAssetsBundle("../../../../Work/Projects/juego-verbos-ui/app/", "/ui", "index.html"));
-		bootstrap.addBundle(new ConfiguredAssetsBundle("/assets/", "/ui/"));
+		bootstrap.addBundle(new ConfiguredAssetsBundle("/assets/", "/", "index.html"));
 
 		store = new VerbStore();
 		store.load();
@@ -30,6 +29,9 @@ public class JuegoVerbosApplication extends Application<JuegoVerbosConfiguration
 
 	@Override
 	public void run(final JuegoVerbosConfiguration configuration, final Environment environment) throws Exception {
+		// see https://groups.google.com/forum/#!topic/dropwizard-user/5qZYhirC--w
+		((DefaultServerFactory) configuration.getServerFactory()).setJerseyRootPath("/api/*");
+
 		final VerbsResource resource = new VerbsResource(store);
 		environment.jersey().register(resource);
 
