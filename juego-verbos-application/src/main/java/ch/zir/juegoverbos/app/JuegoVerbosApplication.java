@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import ch.zir.juegoverbos.app.resources.TenseResource;
 import ch.zir.juegoverbos.app.resources.VerbsResource;
 import ch.zir.juegoverbos.app.store.VerbStore;
 
@@ -32,8 +33,11 @@ public class JuegoVerbosApplication extends Application<JuegoVerbosConfiguration
 		// see https://groups.google.com/forum/#!topic/dropwizard-user/5qZYhirC--w
 		((DefaultServerFactory) configuration.getServerFactory()).setJerseyRootPath("/api/*");
 
-		final VerbsResource resource = new VerbsResource(store);
-		environment.jersey().register(resource);
+		final VerbsResource verbsResource = new VerbsResource(store);
+		environment.jersey().register(verbsResource);
+
+		final TenseResource tenseResource = new TenseResource();
+		environment.jersey().register(tenseResource);
 
 		// TemplateHealthCheck healthCheck = new
 		// TemplateHealthCheck(configuration.getTemplate());

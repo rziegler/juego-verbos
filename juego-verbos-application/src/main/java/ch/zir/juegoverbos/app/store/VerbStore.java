@@ -50,10 +50,11 @@ public class VerbStore {
 
 		final Verb result = new Verb();
 		result.setInfinitive(verb.getInfinitive());
+		result.setGerund(verb.getGerund());
+		result.setPastparticiple(verb.getPastparticiple());
 		result.setTranslations(verb.getTranslations());
 		result.setConjugations(conjugations);
 		log.debug(result.toString());
 		return result;
 	}
-
 }

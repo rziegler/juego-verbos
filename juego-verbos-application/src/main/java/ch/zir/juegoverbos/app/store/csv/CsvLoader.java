@@ -55,6 +55,8 @@ public class CsvLoader {
 
 				final Verb resultVerb = i.stream().reduce(new Verb(), (verb, line) -> {
 					verb.setInfinitive(line.getInfinitive());
+					verb.setGerund(line.getGerund());
+					verb.setPastparticiple(line.getPastparticiple());
 					verb.addTranslation(Language.EN, line.getInfinitiveEnglish());
 
 					final GrammaticalTense tense = GrammaticalTense.from(line.getTense());

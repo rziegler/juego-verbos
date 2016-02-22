@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Verb {
 
 	private String infinitive;
+	private String gerund;
+	private String pastparticiple;
+
 	private final Map<Language, String> translations;
 	private final Set<GrammaticalConjugation> conjugations;
 
@@ -27,6 +30,24 @@ public class Verb {
 
 	public void setInfinitive(final String infinitive) {
 		this.infinitive = infinitive;
+	}
+
+	@JsonProperty
+	public String getPastparticiple() {
+		return pastparticiple;
+	}
+
+	public void setPastparticiple(final String pastparticiple) {
+		this.pastparticiple = pastparticiple;
+	}
+
+	@JsonProperty
+	public String getGerund() {
+		return gerund;
+	}
+
+	public void setGerund(final String gerund) {
+		this.gerund = gerund;
 	}
 
 	@JsonProperty
