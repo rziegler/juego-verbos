@@ -3,6 +3,7 @@ package ch.zir.juegoverbos.api;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,7 +18,7 @@ public class GrammaticalTenseTest {
 
 		// assertThat(actual,
 		// equalTo("{\"es\":\"Futuro\",\"en\":\"Future\",\"de\":\"\"}"));
-		assertThat(actual, equalTo("\"FUTURE\""));
+		assertThat(actual, CoreMatchers.containsString("\"key\":\"FUTURE\""));
 	}
 
 	@Test
