@@ -21,7 +21,6 @@ APPLICATION_SRC_UI="/home/ruth/juego-verbos-ui"
 ui() {
 	cd ${APPLICATION_SRC_UI}
 	git pull
-	cd ${APPLICATION_SRC_UI}
 	npm install
 	echo "Copying juego-verbos UI from '${APPLICATION_SRC_UI}' to '${APPLICATION_HOME}'"
 	cp -r ${APPLICATION_SRC_UI}/app ${APPLICATION_HOME}/ui
@@ -31,7 +30,6 @@ ui() {
 backend() {
     cd ${APPLICATION_SRC_BACKEND}
 	git pull
-	cd ${APPLICATION_SRC_BACKEND}/juego-verbos-application
 	mvn clean package
 	echo "Adjusting chmod for scripts"
 	chmod 755 ${APPLICATIN_SRC_BACKEND}/juego-verbos-application/${APPLICATION_PREFIX}*.sh
