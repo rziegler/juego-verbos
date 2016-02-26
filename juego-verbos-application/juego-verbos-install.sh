@@ -21,7 +21,7 @@ APPLICATION_SRC_UI="/home/ruth/juego-verbos/ui"
 ui() {
 	cd ${APPLICATION_SRC_UI}
 	git pull
-	echo "Copying juego-verbos UI from '${APPLICATIN_SRC_UI}' to '${APPLICATION_HOME}'"
+	echo "Copying juego-verbos UI from '${APPLICATION_SRC_UI}' to '${APPLICATION_HOME}'"
 	cp ${APPLICATIN_SRC_UI}/app ${APPLICATION_HOME}/ui
     return 0
 }
