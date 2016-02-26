@@ -14,7 +14,7 @@ APPLICATION_CONFIG="juego-verbos-prd.yml"
 APPLICATION_CMD="java -jar ${APPLICATION_HOME}/${APPLICATION_JAR} server ${APPLICATION_HOME}/${APPLICATION_CONFIG}"
 APPLICATION_SHUTDOWN_WAIT=120
 APPLICATION_SRC_BACKEND="/home/ruth/juego-verbos"
-APPLICATION_SRC_UI="/home/ruth/juego-verbos/ui"
+APPLICATION_SRC_UI="/home/ruth/juego-verbos-ui"
 
 
 
