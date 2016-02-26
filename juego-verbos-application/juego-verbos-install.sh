@@ -21,8 +21,10 @@ APPLICATION_SRC_UI="/home/ruth/juego-verbos-ui"
 ui() {
 	cd ${APPLICATION_SRC_UI}
 	git pull
+	cd ${APPLICATION_SRC_UI}
+	npm install
 	echo "Copying juego-verbos UI from '${APPLICATION_SRC_UI}' to '${APPLICATION_HOME}'"
-	cp ${APPLICATIN_SRC_UI}/app ${APPLICATION_HOME}/ui
+	cp -r ${APPLICATION_SRC_UI}/app ${APPLICATION_HOME}/ui
     return 0
 }
 
