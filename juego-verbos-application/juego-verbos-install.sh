@@ -6,7 +6,7 @@
 #
 
 APPLICATION_NAME="Juego Verbos Application"
-APPLICATION_PREFIX="juegeo-verbos"
+APPLICATION_PREFIX="juego-verbos"
 APPLICATION_USER="ruth"
 APPLICATION_HOME="/appdata/juego-verbos"
 APPLICATION_JAR="juego-verbos-application.jar"
