@@ -32,12 +32,12 @@ backend() {
 	git pull
 	mvn clean package
 	echo "Adjusting chmod for scripts"
-	chmod 755 ${APPLICATIN_SRC_BACKEND}/juego-verbos-application/${APPLICATION_PREFIX}*.sh
+	chmod 755 ${APPLICATION_SRC_BACKEND}/juego-verbos-application/${APPLICATION_PREFIX}*.sh
 	
-	echo "Copying juego-verbos backend from '${APPLICATIN_SRC_BACKEND}' to '${APPLICATION_HOME}'"
-	cp ${APPLICATIN_SRC_BACKEND}/juego-verbos-application/target/${APPLICATION_PREFIX}*.jar ${APPLICATION_HOME}/${APPLICATION_JAR}
-	cp ${APPLICATIN_SRC_BACKEND}/juego-verbos-application/${APPLICATION_PREFIX}-prd.yml ${APPLICATION_HOME}
-	cp ${APPLICATIN_SRC_BACKEND}/juego-verbos-application/${APPLICATION_PREFIX}*.sh ${APPLICATION_HOME}
+	echo "Copying juego-verbos backend from '${APPLICATION_SRC_BACKEND}' to '${APPLICATION_HOME}'"
+	cp ${APPLICATION_SRC_BACKEND}/juego-verbos-application/target/${APPLICATION_PREFIX}*.jar ${APPLICATION_HOME}/${APPLICATION_JAR}
+	cp ${APPLICATION_SRC_BACKEND}/juego-verbos-application/${APPLICATION_PREFIX}-prd.yml ${APPLICATION_HOME}
+	cp ${APPLICATION_SRC_BACKEND}/juego-verbos-application/${APPLICATION_PREFIX}*.sh ${APPLICATION_HOME}
     return 0
 }
 
