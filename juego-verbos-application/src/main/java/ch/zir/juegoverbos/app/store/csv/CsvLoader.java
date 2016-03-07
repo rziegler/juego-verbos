@@ -72,6 +72,9 @@ public class CsvLoader {
 					v1.setInfinitive(v1.getInfinitive() + v2.getInfinitive());
 					return v1;
 				});
+
+				addGerundConjugations(resultVerb);
+				addFutureSimpleConjugations(resultVerb);
 				result.add(resultVerb);
 			});
 
@@ -80,6 +83,32 @@ public class CsvLoader {
 		}
 		log.info(String.format("Loaded %d verbs.", result.size()));
 		return result;
+	}
+
+	/*
+	 * Adds the gerund as a seperate conjugations for each person
+	 */
+	private void addGerundConjugations(final Verb resultVerb) {
+		final GrammaticalTense tense = GrammaticalTense.GERUNDIO;
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.FIRST_SINGULAR, String.format("estoy %s", resultVerb.getGerund())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.SECOND_SINGULAR, String.format("estás %s", resultVerb.getGerund())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.THIRD_SINGULAR, String.format("está %s", resultVerb.getGerund())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.FIRST_PLURAL, String.format("estamos %s", resultVerb.getGerund())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.SECOND_PLURAL, String.format("estáis %s", resultVerb.getGerund())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.THIRD_PLURAL, String.format("están %s", resultVerb.getGerund())));
+	}
+
+	/*
+	 * Adds the future simple conjugations for each persons.
+	 */
+	private void addFutureSimpleConjugations(final Verb resultVerb) {
+		final GrammaticalTense tense = GrammaticalTense.FUTURE_SIMPLE;
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.FIRST_SINGULAR, String.format("voy %s", resultVerb.getInfinitive())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.SECOND_SINGULAR, String.format("vas %s", resultVerb.getInfinitive())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.THIRD_SINGULAR, String.format("va %s", resultVerb.getInfinitive())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.FIRST_PLURAL, String.format("vamos %s", resultVerb.getInfinitive())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.SECOND_PLURAL, String.format("vais %s", resultVerb.getInfinitive())));
+		resultVerb.addConjugation(new GrammaticalConjugation(tense, GrammaticalPerson.THIRD_PLURAL, String.format("van %s", resultVerb.getInfinitive())));
 	}
 
 	private CsvLine parse(final String element) {

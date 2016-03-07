@@ -18,7 +18,7 @@ public class GrammaticalTenseTest {
 
 		// assertThat(actual,
 		// equalTo("{\"es\":\"Futuro\",\"en\":\"Future\",\"de\":\"\"}"));
-		assertThat(actual, CoreMatchers.containsString("\"key\":\"FUTURE\""));
+		assertThat(actual, CoreMatchers.containsString("\"key\":\"TENSE.FUTURE\""));
 	}
 
 	@Test
